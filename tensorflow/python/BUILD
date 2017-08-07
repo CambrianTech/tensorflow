@@ -1915,6 +1915,16 @@ py_library(
 )
 
 py_library(
+    name = "spectral_ops_test_util",
+    srcs = ["ops/spectral_ops_test_util.py"],
+    srcs_version = "PY2AND3",
+    deps = [
+        ":client_testlib",
+        ":framework_ops",
+    ],
+)
+
+py_library(
     name = "confusion_matrix",
     srcs = ["ops/confusion_matrix.py"],
     srcs_version = "PY2AND3",
@@ -2027,6 +2037,7 @@ py_library(
         ":util",
         ":variable_scope",
         ":variables",
+        "//tensorflow/python/ops/distributions",
     ],
 )
 
@@ -2066,6 +2077,7 @@ py_library(
     srcs = ["ops/summary_ops.py"],
     srcs_version = "PY2AND3",
     deps = [
+        ":framework",
         ":framework_for_generated_wrappers",
         ":logging_ops_gen",
         ":summary_op_util",
@@ -2378,6 +2390,7 @@ cuda_py_test(
         ":variables",
         "//third_party/py/numpy",
     ],
+    tags = ["no_windows"],
 )
 
 cuda_py_test(
@@ -2787,6 +2800,7 @@ tf_py_wrap_cc(
         ":tf_session_helper",
         "//tensorflow/c:c_api",
         "//tensorflow/c:checkpoint_reader",
+        "//tensorflow/c:python_api",
         "//tensorflow/c:tf_status_helper",
         "//tensorflow/core/distributed_runtime/rpc:grpc_server_lib",
         "//tensorflow/core/distributed_runtime/rpc:grpc_session",
@@ -3070,6 +3084,7 @@ py_test(
     deps = [
         ":array_ops",
         ":client",
+        ":client_testlib",
         ":framework",
         ":framework_for_generated_wrappers",
         ":framework_test_lib",
@@ -3912,6 +3927,7 @@ cuda_py_test(
         "//third_party/py/numpy",
         "//tensorflow/core:protos_all_py",
     ],
+    tags = ["manual"],
 )
 
 py_library(

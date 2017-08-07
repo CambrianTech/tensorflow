@@ -61,6 +61,7 @@ py_binary(
     data = [
         "//tensorflow:all_opensource_files",
     ],
+    srcs_version = "PY2AND3",
 )
 
 # On Windows, python binary is a zip file of runfiles tree.
@@ -81,6 +82,7 @@ py_binary(
         "//tensorflow/python:util_example_parser_configuration",
         "//tensorflow/python/debug:debug_pip",
         "//tensorflow/python/saved_model",
+        "//tensorflow/python:spectral_ops_test_util",
         "//tensorflow/python/tools:tools_pip",
         # These targets don't build on Windows yet. Exclude them for now.
         # "//tensorflow/contrib/ndlstm",
@@ -169,6 +171,7 @@ sh_binary(
             "//tensorflow/python:util_example_parser_configuration",
             "//tensorflow/python/debug:debug_pip",
             "//tensorflow/python/saved_model:saved_model",
+            "//tensorflow/python:spectral_ops_test_util",
             "//tensorflow/python/tools:tools_pip",
         ],
     }) + if_mkl(["//third_party/mkl:intel_binary_blob"]),

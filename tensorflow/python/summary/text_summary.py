@@ -28,7 +28,7 @@ import json
 
 from tensorflow.core.framework import summary_pb2
 from tensorflow.python.framework import dtypes
-from tensorflow.python.ops.summary_ops import _tensor_summary_v2
+from tensorflow.python.ops.summary_ops import tensor_summary
 from tensorflow.python.summary import plugin_asset
 
 PLUGIN_NAME = "text"
@@ -70,9 +70,9 @@ def text_summary(name, tensor, collections=None):
   summary_metadata = summary_pb2.SummaryMetadata()
   text_plugin_data = _TextPluginData()
   data_dict = text_plugin_data._asdict()  # pylint: disable=protected-access
-  summary_metadata.plugin_data.add(
-      plugin_name=PLUGIN_NAME, content=json.dumps(data_dict))
-  t_summary = _tensor_summary_v2(
+  summary_metadata.plugin_data.plugin_name = PLUGIN_NAME
+  summary_metadata.plugin_data.content = json.dumps(data_dict)
+  t_summary = tensor_summary(
       name=name,
       tensor=tensor,
       summary_metadata=summary_metadata,
